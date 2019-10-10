@@ -25,6 +25,7 @@
             android:layout_marginRight="15dp"
             android:onClick="CreditViewXClicked"
             android:src="@drawable/ic_close_24dp"/>
+
         <TextView
             android:ellipsize="end"
             android:singleLine="true"
