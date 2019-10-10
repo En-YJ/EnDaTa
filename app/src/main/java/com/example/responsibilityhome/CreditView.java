@@ -4,16 +4,14 @@ package com.example.responsibilityhome;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.responsibilityhome.Entity.PieEntry;
 import com.example.responsibilityhome.View.PieView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import android.view.View;
 
 public class CreditView extends Activity {
     private PieView mPieView;
@@ -21,11 +19,12 @@ public class CreditView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_credit_view);
         mPieView = findViewById(R.id.pieView);
         initPieView();
         TextView name = (TextView)findViewById(R.id.name);
         name.setText("2등급");
+
     }
 
     private void initPieView() {
@@ -61,6 +60,11 @@ public class CreditView extends Activity {
         colorLists.add(Color.parseColor("#4FAAFF"));
         colorLists.add(Color.parseColor("#F0F0F0"));
         return colorLists;
+    }
+
+    //엑스 버튼 클릭
+    public void CreditViewXClicked(View view){
+        finish();
     }
 
 }
