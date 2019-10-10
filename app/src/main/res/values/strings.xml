@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">믿집</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">EnDaTa!</string>
+
+    <string name="menu_credit">신용등급</string>
+    <string name="menu_trade">거래관리</string>
+    <string name="menu_setting">설정</string>
+    <string name="menu_using">이용약관</string>
+</resources>

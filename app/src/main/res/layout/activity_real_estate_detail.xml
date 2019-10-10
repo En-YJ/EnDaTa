@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".RealEstateDetail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/room_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/room1"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/room_title"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:padding="5dp"
+                android:text="유진건물"
+                android:textColor="#5A4D44"
+                android:textSize="21dp" />
+                <TextView
+                    android:id="@+id/room_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="유진건물"
+                    android:textColor="#B9B9B9"
+                    android:textSize="14dp"/>
+        </LinearLayout>
+
+        <Button
+            android:onClick="LandlordCreditButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/yeop_button_style"
+            android:text="임대인 신용보기"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
