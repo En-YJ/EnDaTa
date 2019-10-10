@@ -1,4 +1,4 @@
-package com.example.responsibilityhome;
+package com.example.responsibilityhome.Entity;
 
 
 public class PieEntry {

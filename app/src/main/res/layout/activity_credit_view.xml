@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -8,6 +9,7 @@
 
     <!-- 상단 타이틀바 -->
     <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/colorPrimary">
@@ -38,13 +40,13 @@
             android:textColor="#FFFFFF"/>
     </RelativeLayout>
 
-   <!--안에 내용-->
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title">
 
-        <github.leelion96.piechartview.View.PieView
+        <com.example.responsibilityhome.View.PieView
             android:id="@+id/pieView"
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -59,7 +61,6 @@
             android:textSize="40dp"
             android:textStyle="bold"/>
 
+    </FrameLayout>
 
-    </ScrollView>
-
-</LinearLayout>
+</RelativeLayout>

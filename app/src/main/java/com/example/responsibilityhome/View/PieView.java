@@ -1,4 +1,4 @@
-package com.example.responsibilityhome;
+package com.example.responsibilityhome.View;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.example.responsibilityhome.Entity.PieEntry;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRecyclerAdapter.ViewHolder> {
     Context context;
     List<RealEstateItem> items;
@@ -55,7 +57,7 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("image",item.getImage());
                 intent.putExtra("desc",item.getDesc());
-                context.startActivity(intent);
+                context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
         });
     }

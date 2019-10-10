@@ -1,18 +1,21 @@
 package com.example.responsibilityhome;
 
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.responsibilityhome.Entity.PieEntry;
+import com.example.responsibilityhome.View.PieView;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import github.leelion96.piechartview.Entity.PieEntry;
-import github.leelion96.piechartview.View.PieView;
-
-public class CreditView extends AppCompatActivity {
+public class CreditView extends Activity {
     private PieView mPieView;
 
     @Override
