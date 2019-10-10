@@ -46,15 +46,26 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 .load(item.getImage())
                 .into(holder.image);
 
+       /* if(item.getMonthly().equals("0")) {
+            holder.event.setText(" 전세 ");
+            holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));
+        }
+        else{
+            holder.event.setText(" 월세 ");
+            holder.event.setBackgroundColor(Color.parseColor("#804FB7F8"));
+        }*/
+
         holder.title.setText(item.getTitle());
-        holder.desc.setText(item.getDesc());
+        holder.charter.setText(item.getCharter());
+        //holder.monthly.setText(item.getMonthly());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, RealEstateDetail.class);
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("image",item.getImage());
-                intent.putExtra("desc",item.getDesc());
+                intent.putExtra("charter",item.getCharter());
+                //intent.putExtra("monthly",item.getMonthly());
                 context.startActivity(intent);
             }
         });
@@ -68,14 +79,18 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
-        TextView desc;
+        TextView charter;
+        //TextView monthly;
+        TextView event;
         CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.real_estate_list_image);
             title = (TextView) itemView.findViewById(R.id.real_estate_list_title);
-            desc = (TextView) itemView.findViewById(R.id.real_estate_list_desc);
+            charter = (TextView) itemView.findViewById(R.id.real_estate_list_desc);
+            //monthly = (TextView) itemView.findViewById(R.id.real_estate_list_monthly);
+            event = (TextView) itemView.findViewById(R.id.real_estate_list_event);
             cardview = (CardView) itemView.findViewById(R.id.real_estate_list_item);
         }
     }

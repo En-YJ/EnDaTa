@@ -7,9 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import com.example.responsibilityhome.Network.NetworkTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -27,8 +29,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -38,6 +49,10 @@ public class MainActivity extends AppCompatActivity
 
     private View view;
     private Inflater inflater;
+    public List<RealEstateItem> items;
+
+    String key = "ZhSKuf9bGy86oevKmjyx%2F8qSdyG73oHw1FQYmv%2BgqSc3Z1U3tdPmIyoG%2B907ISVccIAqiSr7VW0E5qXspg6xoA%3D%3D";
+    String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +68,17 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        items = new ArrayList<>();
 
-
-        //일단 임의 데이터 후에 서버에서 불러와서 그리는 작업
+        /*//일단 임의 데이터 후에 서버에서 불러와서 그리는 작업
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.real_estate_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);*/
 
-        List<RealEstateItem> items = new ArrayList<>();
+
+
+        /*List<RealEstateItem> items = new ArrayList<>();
         RealEstateItem[] item = new RealEstateItem[5];
         item[0] = new RealEstateItem(null, "유진","유진 유진");
         item[1] = new RealEstateItem(null,"유진", "유진 유진");
@@ -72,9 +89,18 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < 5; i++) {
             items.add(item[i]);
         }
-        recyclerView.setAdapter(new RealEstateRecyclerAdapter(getApplicationContext(), items, R.layout.content_main));
+        recyclerView.setAdapter(new RealEstateRecyclerAdapter(MainActivity.this, items, R.layout.content_main));*/
 
+        String data = "";
+        String url = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptRent?"//요청 URL
+                +"LAWD_CD=" + "11110"
+                +"&DEAL_YMD=" + "201910"
+                +"&serviceKey=" + key;
+        NetworkTask networkTask = new NetworkTask(MainActivity.this, url, data, 1);
+        networkTask.execute();
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -134,9 +160,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_credit) {
+            //신용등급
             Intent intent = new Intent(getApplicationContext(), CreditView.class);
             startActivity(intent);
         } else if (id == R.id.nav_trade) {
+            //거래관리
             Intent intent = new Intent(getApplicationContext(), TradeView.class);
             startActivity(intent);
         }
