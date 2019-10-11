@@ -23,7 +23,7 @@ public class RequestHttpURLConnection {
 
             httpURLConnection.setReadTimeout(10000); // 10초동안 서버로 부터반응 없으면 에러
             httpURLConnection.setConnectTimeout(10000); // 접속하는 커넥션 타임 10초 동안 접속 안되면 접속안되는 것으로 간주
-            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setRequestProperty("Cache-Control", "no-cache");
             httpURLConnection.setRequestProperty("Accept", "text/html");
             httpURLConnection.setFixedLengthStreamingMode(data.getBytes().length);

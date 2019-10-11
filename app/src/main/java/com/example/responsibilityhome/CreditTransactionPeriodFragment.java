@@ -47,28 +47,36 @@ public class CreditTransactionPeriodFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_credit_transaction_period, container, false);
         list = (ListView) root.findViewById(R.id.list);
+        int minusSum=0;
 
         for(int index=1;index<=10;index++) {
-            String number = "Item"+String.valueOf(index);
-            String title = String.valueOf(index);
-            String score;
-            if(index%2!=0)
-                score = "-" + index;
-            else
-                score = ""+index;
-
+            String content = "Item"+String.valueOf(index);
+            String date = "2019/10/"+String.valueOf(index);
+            String score= "-" + index;
 
             HashMap<String, String> posts2 = new HashMap<String, String>();
 
-            posts2.put("a", number);
-            posts2.put("b", title);
-            posts2.put("c", score);
+            posts2.put("content", content);
+            posts2.put("date", date);
+            posts2.put("score", score);
             stringList.add(posts2);
+            minusSum+=index;
         }
+
+        String content = "감점점수 합";
+        String date = "2019/10/11";
+        String score= "-" + String.valueOf(minusSum);
+
+        HashMap<String, String> posts2 = new HashMap<String, String>();
+
+        posts2.put("content", content);
+        posts2.put("date", date);
+        posts2.put("score", score);
+        stringList.add(posts2);
 
         ListAdapter adapter = new SimpleAdapter(
                 getActivity(), stringList, R.layout.item_detail_credit_check,
-                new String[]{"a", "b", "c"},
+                new String[]{"content", "date", "score"},
                 new int[]{R.id.content, R.id.date, R.id.score}
         );
 

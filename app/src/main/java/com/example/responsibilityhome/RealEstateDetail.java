@@ -28,7 +28,7 @@ public class RealEstateDetail extends AppCompatActivity {
         roomTitle.setText(getIntent().getStringExtra("title"));
 
         TextView roomDesc = findViewById(R.id.room_desc);
-        roomDesc.setText(getIntent().getStringExtra("desc"));
+        roomDesc.setText(getIntent().getStringExtra("charter"));
 
         //이미지를 바꿔준다
         byte[] byteArray = getIntent().getByteArrayExtra("image");
