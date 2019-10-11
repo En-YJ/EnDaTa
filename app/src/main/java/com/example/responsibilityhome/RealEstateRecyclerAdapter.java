@@ -2,6 +2,7 @@ package com.example.responsibilityhome;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,18 +44,25 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 .load(item.getImage())
                 .into(holder.image);
 
-       /* if(item.getMonthly().equals("0")) {
-            holder.event.setText(" 전세 ");
-            holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));
+        if(item.getMonthly().equals("0")) {
+            holder.title.setText("전세 "+item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
         }
         else{
-            holder.event.setText(" 월세 ");
-            holder.event.setBackgroundColor(Color.parseColor("#804FB7F8"));
-        }*/
+            holder.title.setText("월세 "+item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
+        }
 
-        holder.title.setText(item.getTitle());
-        holder.charter.setText(item.getCharter());
-        //holder.monthly.setText(item.getMonthly());
+        //신용공개여부
+        if(true){
+            holder.event.setText(" 신용공개 임대인 ");
+            holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));
+        }
+        else {
+            holder.event.setText(" 신용비공개 임대인 ");
+            holder.event.setBackgroundColor(Color.parseColor("#804FB7F8"));
+        }
+
+        holder.charter.setText("구로구 "+item.getDong());
+
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +70,10 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("image",item.getImage());
                 intent.putExtra("charter",item.getCharter());
-                //intent.putExtra("monthly",item.getMonthly());
+                intent.putExtra("monthly",item.getMonthly());
+                intent.putExtra("dong",item.getDong());
+                intent.putExtra("m2",item.getM2());
+                intent.putExtra("build",item.getBuildYear());
                 context.startActivity(intent);
             }
         });

@@ -27,6 +27,18 @@ public class TradeView extends Activity {
         TextView name = findViewById(R.id.name);
         name.setText(trade.getName());
 
+        TextView location = findViewById(R.id.location);
+        location.setText(trade.getLocation());
+
+        TextView landlordId = findViewById(R.id.landlord_id);
+        landlordId.setText(trade.getLandlordId());
+
+        TextView renterId = findViewById(R.id.renter_id);
+        renterId.setText(trade.getRenterId());
+
+        TextView graphTitle = findViewById(R.id.title_graph);
+        graphTitle.setText("' " + getOpponentId(trade.getLandlordId(), trade.getRenterId()) + " ' 님의 최근 신용 추이");
+
         //막대그래프 추가
         StackedBarChart mStackedBarChart = findViewById(R.id.stackedbarchart);
 
@@ -60,6 +72,11 @@ public class TradeView extends Activity {
         mStackedBarChart.startAnimation();
 
 
+    }
+
+    public String getOpponentId(String landlordId, String renterId){
+        // 거래 상대방의 아이디를 반환
+        return renterId;
     }
     //엑스 버튼 클릭
     public void TradeViewXClicked(View view) {

@@ -21,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,10 +118,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     //공공데이터 가져오기
     public List<RealEstateItem> GetXmlData(){
 
+        List<String> apartment = new ArrayList<>(); // 아파트
+        List<String> deposit = new ArrayList<>(); // 보증금
+        List<String> monthlyList = new ArrayList<>(); // 월세
+        List<String> dong = new ArrayList<>(); //법정동
+        List<String> m2 = new ArrayList<>(); //전용면적
+        List<String> buildYear = new ArrayList<>(); //건축년도
+
+
         List<RealEstateItem> items = new ArrayList<>();
         StringBuffer buffer = new StringBuffer();
         String title=null;
         String desc=null;
+        String monthly = null;
 
         //String str = edit.getText().toString();//EditText에 작성된 Text얻어오기
         //String location = URLEncoder.encode(str);//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding     //지역 검색 위한 변수
@@ -138,12 +148,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             xpp.next();
             int eventType= xpp.getEventType();
 
-            Bitmap bm = BitmapFactory.decodeResource(context.getResources(), R.drawable.room1);
-            bm = ImageConverter.resize(bm);
-            ByteArrayOutputStream  byteArray = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
-            byte[] bytes = byteArray.toByteArray();
-
             while( eventType != XmlPullParser.END_DOCUMENT ){
                 switch( eventType ){
                     case XmlPullParser.START_DOCUMENT:
@@ -158,22 +162,36 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             /*buffer.append("아파트 : ");
                             buffer.append(xpp.getText());//addr 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n"); //줄바꿈 문자 추가*/
-                            title = xpp.getText();
-
-                            RealEstateItem item = new RealEstateItem(bytes,title,desc);
-                            items.add(item);
+                            title = xpp.getText().trim();
+                            apartment.add(title);
+                            /*RealEstateItem item = new RealEstateItem(bytes,title,desc);
+                            items.add(item);*/
                         }
                         else if(tag.equals("보증금액")){
                             xpp.next();
                             /*buffer.append("보증금액 :");
                             buffer.append(xpp.getText());
                             buffer.append("\n");*/
-                            desc = xpp.getText();
+                            desc = xpp.getText().trim();
+                            deposit.add(desc);
                         }
-                        /*else if(tag.equals("월세금액")){
+                        else if(tag.equals("월세금액")){
                             xpp.next();
-                            desc = xpp.getText();
-                        }*/
+                            monthly = xpp.getText().trim();
+                            monthlyList.add(monthly);
+                        }
+                        else if(tag.equals("법정동")){
+                            xpp.next();
+                            dong.add(xpp.getText().trim());
+                        }
+                        else if(tag.equals("전용면적")){
+                            xpp.next();
+                            m2.add(xpp.getText());
+                        }
+                        else if(tag.equals("건축년도")){
+                            xpp.next();
+                            buildYear.add(xpp.getText());
+                        }
 
                         break;
 
@@ -189,7 +207,25 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 eventType= xpp.next();
             }
 
-        } catch (Exception e) {
+            byte[] bytes = ImageGo(R.drawable.room1);
+            byte[] bytes2 = ImageGo(R.drawable.room2);
+            byte[] bytes3 = ImageGo(R.drawable.room3);
+
+            // 다 넣어줘어어어어ㅓ
+            for(int i = 0 ; i < apartment.size(); i++)
+            {
+                RealEstateItem item = new RealEstateItem(bytes,apartment.get(i),deposit.get(i),monthlyList.get(i),dong.get(i),m2.get(i),buildYear.get(i));
+                items.add(item);
+                if(i%2==1)
+                    bytes = bytes2;
+                else
+                    bytes = bytes3;
+            }
+
+
+        }
+
+        catch (Exception e) {
 
         }
 
@@ -199,4 +235,15 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         return items;
 
     }
+
+    public byte[] ImageGo(int image){
+        Bitmap bm = BitmapFactory.decodeResource(context.getResources(),image);
+        bm = ImageConverter.resize(bm);
+        ByteArrayOutputStream  byteArray = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
+        byte[] bytes = byteArray.toByteArray();
+
+        return bytes;
+    }
+
 }
