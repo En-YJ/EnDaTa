@@ -46,18 +46,18 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 .load(item.getImage())
                 .into(holder.image);
 
-       /* if(item.getMonthly().equals("0")) {
+        if(item.getMonthly().equals("0")) {
             holder.event.setText(" 전세 ");
             holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));
         }
         else{
             holder.event.setText(" 월세 ");
             holder.event.setBackgroundColor(Color.parseColor("#804FB7F8"));
-        }*/
+        }
 
-        holder.title.setText(item.getTitle());
-        holder.charter.setText(item.getCharter());
-        //holder.monthly.setText(item.getMonthly());
+        holder.title.setText(item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
+        holder.charter.setText("구로구 "+item.getDong());
+
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,10 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("image",item.getImage());
                 intent.putExtra("charter",item.getCharter());
-                //intent.putExtra("monthly",item.getMonthly());
+                intent.putExtra("monthly",item.getMonthly());
+                intent.putExtra("dong",item.getDong());
+                intent.putExtra("m2",item.getM2());
+                intent.putExtra("build",item.getBuildYear());
                 context.startActivity(intent);
             }
         });

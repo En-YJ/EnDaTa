@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity
 
         String data = "";
         String url = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptRent?"//요청 URL
-                +"LAWD_CD=" + "11110"
+                +"LAWD_CD=" + "11530"
                 +"&DEAL_YMD=" + "201910"
                 +"&serviceKey=" + key;
         NetworkTask networkTask = new NetworkTask(MainActivity.this, url, data, 1);

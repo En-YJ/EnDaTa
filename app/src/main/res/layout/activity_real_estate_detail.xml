@@ -9,11 +9,9 @@
     android:fitsSystemWindows="true"
     tools:context=".RealEstateDetail">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/room_image"
             android:layout_width="match_parent"
@@ -24,21 +22,215 @@
             android:layout_gravity="center"
             android:background="@color/white"
             />
+
+        <TextView
+            android:id="@+id/room_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 유진 "
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"
+            android:background="#804FB7F8"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="left|top"
+            />
+    </FrameLayout>
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="매물 정보"
+        android:textColor="#5A4D44"
+        android:textSize="21dp" />
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="건물명"
+                android:textColor="@color/colorPrimaryDark"
+                />
+
+            <EditText
+                android:enabled="false"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="유진"
+                android:id="@+id/room_title"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="주소"
+                android:textColor="@color/colorPrimaryDark"
+                />
+
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="유진"
+                android:enabled="false"
+                android:id="@+id/room_dong"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="보증금"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="유진"
+                android:enabled="false"
+                android:id="@+id/room_desc"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="월세금"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <EditText
+                android:enabled="false"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/room_monthly"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="면적"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <EditText
+                android:enabled="false"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/room_m2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="건축년도"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <EditText
+                android:enabled="false"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/room_build"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/room_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/room1"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                />
+
+            &lt;!&ndash; 이벤트 알려주기 &ndash;&gt;
+            <TextView
+                android:id="@+id/room_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 유진 "
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"
+                android:background="#804FB7F8"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="left|top"
+                />
+
+        </FrameLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="5"
             android:layout_gravity="center"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/room_title"
-                android:ellipsize="end"
                 android:singleLine="true"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="#FFFFFF"
-                android:padding="5dp"
                 android:text="유진건물"
                 android:textColor="#5A4D44"
                 android:textSize="21dp" />
@@ -50,19 +242,62 @@
                     android:text="유진건물"
                     android:textColor="#B9B9B9"
                     android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/room_monthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="유진건물"
+                android:textColor="#B9B9B9"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/room_dong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="유진건물"
+                android:textColor="#B9B9B9"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/room_m2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="유진건물"
+                android:textColor="#B9B9B9"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/room_build"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="유진건물"
+                android:textColor="#B9B9B9"
+                android:textSize="14dp"/>
         </LinearLayout>
 
         <Button
             android:onClick="LandlordCreditButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+
             android:background="@drawable/yeop_button_style"
-            android:text="임대인 신용보기"
+            android:text="임대인 신용 열람 신청"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
-    </LinearLayout>
+    </LinearLayout>-->
+    <Button
+        android:onClick="LandlordCreditButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
 
+        android:background="@drawable/yeop_button_style"
+        android:text="임대인 신용 열람 신청"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="17dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"/>
 
 </LinearLayout>
