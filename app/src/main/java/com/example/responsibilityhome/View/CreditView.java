@@ -58,6 +58,9 @@ public class CreditView extends Activity {
     //신용카드
     String[] userCreditCardDataSplit;
 
+    //대출내역
+    String[] userLoanDataSplit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +68,6 @@ public class CreditView extends Activity {
         mPieView = findViewById(R.id.pieView);
         initPieView();
         TextView name = (TextView)findViewById(R.id.name);
-        name.setText("2등급");
 
         TextView sumScore = (TextView)findViewById(R.id.sum_score);
 
@@ -103,20 +105,37 @@ public class CreditView extends Activity {
 
         //투자
         TextView investScore = findViewById(R.id.invest_score);
-        if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=50000000)
+        if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
             investScore.setText("100");
-        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=10000000)
+        else if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
             investScore.setText("80");
-        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=2000000)
+        else if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
             investScore.setText("60");
-        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=1000000)
+        else if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
             investScore.setText("40");
-        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=500000)
+        else if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
             investScore.setText("20");
         else
-            investScore.setText("20");
+            investScore.setText("0");
 
         sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(investScore.getText().toString())));
+
+        //보험
+        TextView insuranceScore = findViewById(R.id.insurance_score);
+        if(Integer.parseInt(userAccountDataSplit[13])>=5000000)
+            insuranceScore.setText("100");
+        else if(Integer.parseInt(userAccountDataSplit[13])>=3000000)
+            insuranceScore.setText("80");
+        else if(Integer.parseInt(userAccountDataSplit[13])>=1000000)
+            insuranceScore.setText("60");
+        else if(Integer.parseInt(userAccountDataSplit[13])>=500000)
+            insuranceScore.setText("40");
+        else if(Integer.parseInt(userAccountDataSplit[13])>=100000)
+            insuranceScore.setText("20");
+        else
+            insuranceScore.setText("0");
+
+        sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(insuranceScore.getText().toString())));
 
         //대출
         TextView loanScore = findViewById(R.id.loan_score);
@@ -148,15 +167,15 @@ public class CreditView extends Activity {
 
         //대출
         TextView cashScore = findViewById(R.id.cash_score);
-        if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=1000000)
+        if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=10000000)
             cashScore.setText("0");
-        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>500000)
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=5000000)
             cashScore.setText("20");
-        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>200000)
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=2000000)
             cashScore.setText("40");
-        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>100000)
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=1000000)
             cashScore.setText("60");
-        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>50000)
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>500000)
             cashScore.setText("80");
         else
             cashScore.setText("100");
@@ -174,18 +193,64 @@ public class CreditView extends Activity {
             e.printStackTrace();
         }
 
-        TextView cardScore = findViewById(R.id.card_score);
+        TextView cardScore = findViewById(R.id.card_service_score);
+        if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>=1000000)
+            cardScore.setText("0");
+        else if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>500000)
+            cardScore.setText("20");
+        else if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>200000)
+            cardScore.setText("40");
+        else if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>100000)
+            cardScore.setText("60");
+        else if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>50000)
+            cardScore.setText("80");
+        else
+            cardScore.setText("100");
+
+        sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(cardScore.getText().toString())));
 
 
         GetLoanDataJSON g4 = new GetLoanDataJSON();
         try {
             userLoanData = g4.execute("http://49.236.135.136/LoanData_select.php").get();
             Log.d("yeop", ""+userLoanData);
+            userLoanDataSplit = userLoanData.split("/");
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        TextView loanNumber = findViewById(R.id.overdue_score);
+        loanNumber.setText(userLoanDataSplit[5]);
+        if(Integer.parseInt(userLoanDataSplit[5])>=10)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("0")));
+        else if(Integer.parseInt(userLoanDataSplit[5])>=7)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("40")));
+        else if(Integer.parseInt(userLoanDataSplit[5])>=5)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("80")));
+        else if(Integer.parseInt(userLoanDataSplit[5])>=3)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("120")));
+        else if(Integer.parseInt(userLoanDataSplit[5])>=1)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("160")));
+        else
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("200")));
+
+        //상환률
+        TextView repaymentPercent = findViewById(R.id.repayment_score);
+        repaymentPercent.setText(String.valueOf(Integer.parseInt(userLoanDataSplit[2])*100/Integer.parseInt(userLoanDataSplit[3])));
+        if(Integer.parseInt(repaymentPercent.getText().toString())>=100)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("100")));
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=80)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("80")));
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=60)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("60")));
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=40)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("40")));
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=20)
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("20")));
+        else
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("0")));
 
         GetUserDataJSON g5 = new GetUserDataJSON();
         try {
@@ -197,49 +262,29 @@ public class CreditView extends Activity {
             e.printStackTrace();
         }
 
+        if(Integer.parseInt(sumScore.getText().toString())>=900)
+            name.setText("1등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=800)
+            name.setText("2등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=700)
+            name.setText("3등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=600)
+            name.setText("4등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=500)
+            name.setText("5등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=400)
+            name.setText("6등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=300)
+            name.setText("7등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=200)
+            name.setText("8등급");
+        else if(Integer.parseInt(sumScore.getText().toString())>=100)
+            name.setText("9등급");
+        else
+            name.setText("10등급");
 
-/*
-        //막대그래프 추가
-        StackedBarChart mStackedBarChart = findViewById(R.id.stackedbarchart);
 
-        StackedBarModel s1 = new StackedBarModel("2개월전");
 
-        s1.addBar(new BarModel(2.3f, Color.parseColor("#EBBF03")));
-        s1.addBar(new BarModel(2.3f, Color.parseColor("#ff4d4d")));
-        s1.addBar(new BarModel(2.3f, Color.parseColor("#8d5ff5")));
-        s1.addBar(new BarModel(2.3f, Color.parseColor("#41D230")));
-        s1.addBar(new BarModel(2.3f, Color.parseColor("#4FAAFF")));
-
-        StackedBarModel s2 = new StackedBarModel("1개월전");
-        s2.addBar(new BarModel(1.1f, Color.parseColor("#EBBF03")));
-        s2.addBar(new BarModel(2.7f, Color.parseColor("#ff4d4d")));
-        s2.addBar(new BarModel(0.7f, Color.parseColor("#8d5ff5")));
-        s2.addBar(new BarModel(0.7f, Color.parseColor("#41D230")));
-        s2.addBar(new BarModel(0.7f, Color.parseColor("#4FAAFF")));
-
-        StackedBarModel s3 = new StackedBarModel("현재");
-
-        s3.addBar(new BarModel(2.3f, Color.parseColor("#EBBF03")));
-        s3.addBar(new BarModel(2.f, Color.parseColor("#ff4d4d")));
-        s3.addBar(new BarModel(3.3f, Color.parseColor("#8d5ff5")));
-        s3.addBar(new BarModel(3.3f, Color.parseColor("#41D230")));
-        s3.addBar(new BarModel(3.3f, Color.parseColor("#4FAAFF")));
-
-        mStackedBarChart.addBar(s1);
-        mStackedBarChart.addBar(s2);
-        mStackedBarChart.addBar(s3);
-
-        mStackedBarChart.startAnimation();
-
-        Button detailbutton = (Button) findViewById(R.id.detailbutton);
-        detailbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CreditView.this, ResponsibilityDetailActivity.class);
-                startActivity(intent);
-            }
-        });
-*/
     }
 
        class GetAccountDataJSON extends AsyncTask<String, Void, String> {
@@ -333,8 +378,8 @@ public class CreditView extends Activity {
                 posts = jsonObj.getJSONArray(TAG_AMOUNT);
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject c = posts.getJSONObject(i);
-                    if (c.getString("joinKey").equals("youngjinBBam")) {
-                        userData += ""+ c.getString("resUsedAmount") + "/" + c.getString("resRemaionLimit") + "/";
+                    if (c.getString("joinKey").equals("yujinBBam")) {
+                        userData += ""+ c.getString("resUsedAmount") + "/" + c.getString("resRemainLimit") + "/";
                     }
                 }
                 return userData;

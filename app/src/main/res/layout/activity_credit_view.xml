@@ -363,11 +363,20 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/insurance_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="20sp"
+                        android:layout_toLeftOf="@+id/test6"/>
+
+                    <TextView
+                        android:id="@+id/test6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="0 점"
-                        android:textSize="20sp" />
+                        android:text=" 점"
+                        android:textSize="20sp"/>
                 </RelativeLayout>
 
                 <ListView
@@ -391,16 +400,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="연체(10%)"
+                    android:text="연체(20%)"
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/overdue_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:layout_toLeftOf="@+id/test7"/>
+
+                <TextView
+                    android:id="@+id/test7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="0 회"
-                    android:textColor="@color/red"
-                    android:textSize="20sp" />
+                    android:text=" 회"
+                    android:textSize="20sp"/>
             </RelativeLayout>
 
             <View
@@ -423,11 +440,20 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/repayment_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:layout_toLeftOf="@+id/test8"/>
+
+                <TextView
+                    android:id="@+id/test8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="0 %"
-                    android:textSize="20sp" />
+                    android:text=" %"
+                    android:textSize="20sp"/>
             </RelativeLayout>
 
             <View
