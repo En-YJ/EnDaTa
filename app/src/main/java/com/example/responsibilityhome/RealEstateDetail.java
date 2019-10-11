@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.responsibilityhome.View.LandlordCreditView;
+import com.example.responsibilityhome.View.UserCreditView;
 
 public class RealEstateDetail extends AppCompatActivity {
 
@@ -63,11 +65,21 @@ public class RealEstateDetail extends AppCompatActivity {
                 .load(byteArray)
                 .into(imageView);
 
+        ImageView user = findViewById(R.id.user_icon);
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UserCreditView.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
     public void LandlordCreditViewApplyButton(View view){
         //신용 열람 버튼 눌렀을시
+        Toast.makeText(getApplicationContext(),"임대인 신용 열람 신청이 완료되었습니다. 임대인이 승인을 하면 신용 등급을 열람할 수 있습니다.", Toast.LENGTH_SHORT).show();
     }
 
 

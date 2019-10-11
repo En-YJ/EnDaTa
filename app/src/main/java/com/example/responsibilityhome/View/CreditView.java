@@ -2,6 +2,7 @@ package com.example.responsibilityhome.View;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -74,6 +75,17 @@ public class CreditView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credit_view);
+
+        Button addAccountBtn = findViewById(R.id.btn_add_account);
+        addAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 계좌 연동 페이지 띄움
+                Intent intent = new Intent(getApplicationContext(), AddAcountView.class);
+                startActivity(intent);
+            }
+        });
+
         mPieView = findViewById(R.id.pieView);
 
         TextView name = (TextView)findViewById(R.id.name);
