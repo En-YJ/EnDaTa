@@ -44,6 +44,10 @@ public class CreditView extends Activity {
     private static final String TAG_AMOUNT = "result";
 
     JSONArray posts = null;
+    String userAccountData;
+    String userCardData;
+    String userCreditCardData;
+    String userLoanData;
     String userData;
 
     @Override
@@ -55,15 +59,57 @@ public class CreditView extends Activity {
         TextView name = (TextView)findViewById(R.id.name);
         name.setText("2등급");
 
-        GetDataJSON g = new GetDataJSON();
+        GetAccountDataJSON g1 = new GetAccountDataJSON();
         try {
-            userData = g.execute("http://49.236.135.136/holding_account_select.php").get();
+            userAccountData = g1.execute("http://49.236.135.136/holding_account_select.php").get();
+            Log.d("yeop", ""+userAccountData);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        GetCardDataJSON g2 = new GetCardDataJSON();
+        try {
+            userCardData = g2.execute("http://49.236.135.136/CardService_select.php").get();
+            Log.d("yeop", ""+userCardData);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        GetCreditCardDataJSON g3 = new GetCreditCardDataJSON();
+        try {
+            userCreditCardData = g3.execute("http://49.236.135.136/CreditCard_select.php").get();
+            Log.d("yeop", ""+userCreditCardData);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        GetLoanDataJSON g4 = new GetLoanDataJSON();
+        try {
+            userLoanData = g4.execute("http://49.236.135.136/LoanData_select.php").get();
+            Log.d("yeop", ""+userLoanData);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        GetUserDataJSON g5 = new GetUserDataJSON();
+        try {
+            userData = g5.execute("http://49.236.135.136/User_select.php").get();
             Log.d("yeop", ""+userData);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
 /*
         //막대그래프 추가
         StackedBarChart mStackedBarChart = findViewById(R.id.stackedbarchart);
@@ -108,7 +154,7 @@ public class CreditView extends Activity {
 */
     }
 
-       class GetDataJSON extends AsyncTask<String, Void, String> {
+       class GetAccountDataJSON extends AsyncTask<String, Void, String> {
             @Override
            protected String doInBackground(String... params) {
                 String uri = params[0];
@@ -125,7 +171,6 @@ public class CreditView extends Activity {
                         sb.append(json + "\n");
                     }
                     myJSON = sb.toString().trim();
-                    Log.d("yeop", "what1");
                     JSONObject jsonObj = new JSONObject(myJSON);
                     posts = jsonObj.getJSONArray(TAG_AMOUNT);
                     for (int i = 0; i < posts.length(); i++) {
@@ -143,6 +188,146 @@ public class CreditView extends Activity {
            protected void onPostExecute(String result) {
            }
        }
+
+    class GetCardDataJSON extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String uri = params[0];
+
+            BufferedReader bufferedReader = null;
+            try {
+                String userData="";
+                URL url = new URL(uri);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String json;
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                myJSON = sb.toString().trim();
+                JSONObject jsonObj = new JSONObject(myJSON);
+                posts = jsonObj.getJSONArray(TAG_AMOUNT);
+                for (int i = 0; i < posts.length(); i++) {
+                    JSONObject c = posts.getJSONObject(i);
+                    if (c.getString("joinKey").equals("youngjinBBam")) {
+                        userData += ""+ c.getString("resCashService") + "/" + c.getString("resCardLoan") + "/";
+                    }
+                }
+                return userData;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+        }
+    }
+
+    class GetCreditCardDataJSON extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String uri = params[0];
+
+            BufferedReader bufferedReader = null;
+            try {
+                String userData="";
+                URL url = new URL(uri);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String json;
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                myJSON = sb.toString().trim();
+                JSONObject jsonObj = new JSONObject(myJSON);
+                posts = jsonObj.getJSONArray(TAG_AMOUNT);
+                for (int i = 0; i < posts.length(); i++) {
+                    JSONObject c = posts.getJSONObject(i);
+                    if (c.getString("joinKey").equals("youngjinBBam")) {
+                        userData += ""+ c.getString("resUsedAmount") + "/" + c.getString("resRemaionLimit") + "/";
+                    }
+                }
+                return userData;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+        }
+    }
+
+    class GetLoanDataJSON extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String uri = params[0];
+
+            BufferedReader bufferedReader = null;
+            try {
+                String userData="";
+                URL url = new URL(uri);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String json;
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                myJSON = sb.toString().trim();
+                JSONObject jsonObj = new JSONObject(myJSON);
+                posts = jsonObj.getJSONArray(TAG_AMOUNT);
+                for (int i = 0; i < posts.length(); i++) {
+                    JSONObject c = posts.getJSONObject(i);
+                    if (c.getString("joinKey").equals("youngjinBBam")) {
+                        userData += ""+ c.getString("resAccountStartDate") + "/" + c.getString("resAccountEndDate") + "/" + c.getString("resLoanBalance") + "/" + c.getString("resPrincipal") + "/" + c.getString("resRate") + "/" + c.getString("resState") + "/";
+                    }
+                }
+                return userData;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+        }
+    }
+
+    class GetUserDataJSON extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String uri = params[0];
+
+            BufferedReader bufferedReader = null;
+            try {
+                String userData="";
+                URL url = new URL(uri);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String json;
+                while ((json = bufferedReader.readLine()) != null) {
+                    sb.append(json + "\n");
+                }
+                myJSON = sb.toString().trim();
+                JSONObject jsonObj = new JSONObject(myJSON);
+                posts = jsonObj.getJSONArray(TAG_AMOUNT);
+                for (int i = 0; i < posts.length(); i++) {
+                    JSONObject c = posts.getJSONObject(i);
+                    if (c.getString("joinKey").equals("youngjinBBam")) {
+                        userData += ""+ c.getString("name") + "/" + c.getString("id") + "/" + c.getString("password") + "/";
+                    }
+                }
+                return userData;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(String result) {
+        }
+    }
 
     private void initPieView() {
         mPieView.setColors(createColors());
