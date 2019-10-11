@@ -87,6 +87,8 @@ class NoticeAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 // 사용자 정보 화면 띄움
+                Intent intent = new Intent(context, UserCreditView.class);
+                context.startActivity(intent);
             }
         });
 
