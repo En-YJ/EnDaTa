@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.responsibilityhome.Network.NetworkTask;
 import com.example.responsibilityhome.Network.RealEstateItem;
 import com.example.responsibilityhome.View.CreditView;
 import com.example.responsibilityhome.View.TradeView;
@@ -23,8 +25,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.view.Menu;
 
@@ -37,6 +38,10 @@ public class MainActivity extends AppCompatActivity
 
     private View view;
     private Inflater inflater;
+    public List<RealEstateItem> items;
+
+    String key = "ZhSKuf9bGy86oevKmjyx%2F8qSdyG73oHw1FQYmv%2BgqSc3Z1U3tdPmIyoG%2B907ISVccIAqiSr7VW0E5qXspg6xoA%3D%3D";
+    String data;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -53,15 +58,17 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        items = new ArrayList<>();
 
-
-        //일단 임의 데이터 후에 서버에서 불러와서 그리는 작업
+        /*//일단 임의 데이터 후에 서버에서 불러와서 그리는 작업
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.real_estate_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);*/
 
-        List<RealEstateItem> items = new ArrayList<>();
+
+
+        /*List<RealEstateItem> items = new ArrayList<>();
         RealEstateItem[] item = new RealEstateItem[5];
         item[0] = new RealEstateItem(null, "유진", "유진 유진");
         item[1] = new RealEstateItem(null, "유진", "유진 유진");
@@ -72,9 +79,18 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < 5; i++) {
             items.add(item[i]);
         }
-        recyclerView.setAdapter(new RealEstateRecyclerAdapter(getApplicationContext(), items, R.layout.content_main));
+        recyclerView.setAdapter(new RealEstateRecyclerAdapter(MainActivity.this, items, R.layout.content_main));*/
 
+        String data = "";
+        String url = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptRent?"//요청 URL
+                +"LAWD_CD=" + "11110"
+                +"&DEAL_YMD=" + "201910"
+                +"&serviceKey=" + key;
+        NetworkTask networkTask = new NetworkTask(MainActivity.this, url, data, 1);
+        networkTask.execute();
     }
+
+
 
     @Override
     public void onBackPressed() {
