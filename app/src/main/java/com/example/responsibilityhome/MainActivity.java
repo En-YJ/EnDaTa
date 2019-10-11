@@ -3,20 +3,20 @@ package com.example.responsibilityhome;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.responsibilityhome.Network.RealEstateItem;
+import com.example.responsibilityhome.View.CreditView;
+import com.example.responsibilityhome.View.TradeView;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     private View view;
     private Inflater inflater;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity
 
         List<RealEstateItem> items = new ArrayList<>();
         RealEstateItem[] item = new RealEstateItem[5];
-        item[0] = new RealEstateItem(null, "유진","유진 유진");
-        item[1] = new RealEstateItem(null,"유진", "유진 유진");
-        item[2] = new RealEstateItem(null, "유진","유진 유진");
-        item[3] = new RealEstateItem(null,"유진", "유진 유진");
-        item[4] = new RealEstateItem(null, "유진","유진");
+        item[0] = new RealEstateItem(null, "유진", "유진 유진");
+        item[1] = new RealEstateItem(null, "유진", "유진 유진");
+        item[2] = new RealEstateItem(null, "유진", "유진 유진");
+        item[3] = new RealEstateItem(null, "유진", "유진 유진");
+        item[4] = new RealEstateItem(null, "유진", "유진");
 
         for (int i = 0; i < 5; i++) {
             items.add(item[i]);
@@ -133,17 +133,24 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_credit) {
-            Intent intent = new Intent(getApplicationContext(), CreditView.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_trade) {
-            Intent intent = new Intent(getApplicationContext(), TradeView.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_setting) {
-
-        } else if (id == R.id.nav_using) {
-
+        Intent intent;
+        switch(id){
+            case R.id.nav_credit:
+                intent = new Intent(getApplicationContext(), CreditView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_trade:
+                intent = new Intent(getApplicationContext(), TradeView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_monitor:
+                break;
+            case R.id.nav_notice:
+                break;
+            case R.id.nav_setting:
+                break;
+            case R.id.nav_using:
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

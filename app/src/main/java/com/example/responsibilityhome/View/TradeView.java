@@ -1,8 +1,10 @@
-package com.example.responsibilityhome;
+package com.example.responsibilityhome.View;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.responsibilityhome.R;
 
 public class TradeView extends Activity {
 

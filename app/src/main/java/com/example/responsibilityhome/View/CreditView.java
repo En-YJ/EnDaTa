@@ -1,8 +1,10 @@
-package com.example.responsibilityhome;
+package com.example.responsibilityhome.View;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.responsibilityhome.R;
 
 public class CreditView extends Activity {
 
@@ -14,7 +16,7 @@ public class CreditView extends Activity {
     }
 
 
-    //엑스 버튼 클릭
+    // 엑스 버튼 클릭
     public void CreditViewXClicked(View view){
         finish();
     }
