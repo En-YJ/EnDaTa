@@ -48,6 +48,15 @@ public class CreditView extends Activity {
     String userLoanData;
     String userData;
 
+    TextView insuranceScore = null;
+    TextView investScore = null;
+    TextView loanScore = null;
+    TextView accountScore = null;
+    TextView cashScore = null;
+    TextView cardScore = null;
+    TextView loanNumber = null;
+    TextView repaymentPercent = null;
+
     //재정
     String[] userAccountDataSplit;
     int accountMoneySum=0;
@@ -66,7 +75,7 @@ public class CreditView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credit_view);
         mPieView = findViewById(R.id.pieView);
-        initPieView();
+
         TextView name = (TextView)findViewById(R.id.name);
 
         TextView sumScore = (TextView)findViewById(R.id.sum_score);
@@ -86,7 +95,7 @@ public class CreditView extends Activity {
         }
 
         //예금/신탁
-        TextView accountScore = findViewById(R.id.account_score);
+        accountScore = findViewById(R.id.account_score);
         if(Integer.parseInt(userAccountDataSplit[1])>=50000000)
             accountScore.setText("200");
         else if(Integer.parseInt(userAccountDataSplit[1])>=10000000)
@@ -104,7 +113,7 @@ public class CreditView extends Activity {
         sumScore.setText(String.valueOf(Integer.parseInt(accountScore.getText().toString())+Integer.parseInt(sumScore.getText().toString())));
 
         //투자
-        TextView investScore = findViewById(R.id.invest_score);
+        investScore = findViewById(R.id.invest_score);
         if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
             investScore.setText("100");
         else if(Integer.parseInt(userAccountDataSplit[5])>=50000000)
@@ -121,7 +130,7 @@ public class CreditView extends Activity {
         sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(investScore.getText().toString())));
 
         //보험
-        TextView insuranceScore = findViewById(R.id.insurance_score);
+        insuranceScore = findViewById(R.id.insurance_score);
         if(Integer.parseInt(userAccountDataSplit[13])>=5000000)
             insuranceScore.setText("100");
         else if(Integer.parseInt(userAccountDataSplit[13])>=3000000)
@@ -138,7 +147,7 @@ public class CreditView extends Activity {
         sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(insuranceScore.getText().toString())));
 
         //대출
-        TextView loanScore = findViewById(R.id.loan_score);
+        loanScore = findViewById(R.id.loan_score);
         if(Integer.parseInt(userAccountDataSplit[9])>=20000000)
             loanScore.setText("0");
         else if(Integer.parseInt(userAccountDataSplit[9])>=10000000)
@@ -165,8 +174,8 @@ public class CreditView extends Activity {
             e.printStackTrace();
         }
 
-        //대출
-        TextView cashScore = findViewById(R.id.cash_score);
+        //현금서비스
+        cashScore = findViewById(R.id.cash_score);
         if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=10000000)
             cashScore.setText("0");
         else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=5000000)
@@ -193,7 +202,8 @@ public class CreditView extends Activity {
             e.printStackTrace();
         }
 
-        TextView cardScore = findViewById(R.id.card_service_score);
+        //카드
+        cardScore = findViewById(R.id.card_service_score);
         if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>=1000000)
             cardScore.setText("0");
         else if(Integer.parseInt(userCreditCardDataSplit[0])+Integer.parseInt(userCreditCardDataSplit[1])>500000)
@@ -221,7 +231,8 @@ public class CreditView extends Activity {
             e.printStackTrace();
         }
 
-        TextView loanNumber = findViewById(R.id.overdue_score);
+        //연체
+        loanNumber = findViewById(R.id.overdue_score);
         loanNumber.setText(userLoanDataSplit[5]);
         if(Integer.parseInt(userLoanDataSplit[5])>=10)
             sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("0")));
@@ -237,7 +248,7 @@ public class CreditView extends Activity {
             sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("200")));
 
         //상환률
-        TextView repaymentPercent = findViewById(R.id.repayment_score);
+        repaymentPercent = findViewById(R.id.repayment_score);
         repaymentPercent.setText(String.valueOf(Integer.parseInt(userLoanDataSplit[2])*100/Integer.parseInt(userLoanDataSplit[3])));
         if(Integer.parseInt(repaymentPercent.getText().toString())>=100)
             sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("100")));
@@ -284,7 +295,7 @@ public class CreditView extends Activity {
             name.setText("10등급");
 
 
-
+        initPieView();
     }
 
        class GetAccountDataJSON extends AsyncTask<String, Void, String> {
@@ -469,16 +480,48 @@ public class CreditView extends Activity {
 
     private ArrayList<PieEntry> createData() {
         ArrayList<PieEntry> pieLists = new ArrayList<>();
-        pieLists.add(new PieEntry(20.00F, "상환이력"));
-        pieLists.add(new PieEntry(20.00F, ""));
-        pieLists.add(new PieEntry(5.00F, "재정수준"));
-        pieLists.add(new PieEntry(0.00F, ""));
-        pieLists.add(new PieEntry(10.00F, "거래기간"));
-        pieLists.add(new PieEntry(5.00F, ""));
-        pieLists.add(new PieEntry(10.00F, "대출"));
-        pieLists.add(new PieEntry(20.00F, ""));
-        pieLists.add(new PieEntry(5.00F, "임의"));
-        pieLists.add(new PieEntry(5.00F, ""));
+        float finance = (Float.valueOf(accountScore.getText().toString())+Float.valueOf(loanScore.getText().toString()))/10;
+        float card = (Float.valueOf(cardScore.getText().toString())+Float.valueOf(cashScore.getText().toString()))/10;
+        float invest = (Float.valueOf(investScore.getText().toString())+Float.valueOf(insuranceScore.getText().toString()))/10;
+        float overdue;
+        float repayment;
+        loanNumber.setText(userLoanDataSplit[5]);
+        if(Integer.parseInt(userLoanDataSplit[5])>=10)
+            overdue=0;
+        else if(Integer.parseInt(userLoanDataSplit[5])>=7)
+            overdue=4;
+        else if(Integer.parseInt(userLoanDataSplit[5])>=5)
+            overdue=8;
+        else if(Integer.parseInt(userLoanDataSplit[5])>=3)
+            overdue=12;
+        else if(Integer.parseInt(userLoanDataSplit[5])>=1)
+            overdue=16;
+        else
+            overdue=20;
+
+        repaymentPercent.setText(String.valueOf(Integer.parseInt(userLoanDataSplit[2])*100/Integer.parseInt(userLoanDataSplit[3])));
+        if(Integer.parseInt(repaymentPercent.getText().toString())>=100)
+            repayment=10;
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=80)
+            repayment=8;
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=60)
+            repayment=6;
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=40)
+            repayment=4;
+        else if(Integer.parseInt(repaymentPercent.getText().toString())>=20)
+            repayment=2;
+        else
+            repayment=0;
+        pieLists.add(new PieEntry(finance, "재정수준"));     //30% - 예금/신탁(accountScore), 대출(loanScore)
+        pieLists.add(new PieEntry(30-finance, ""));
+        pieLists.add(new PieEntry(overdue, "연체내역"));      //20% - 연체(loanNumber)
+        pieLists.add(new PieEntry(20-overdue, ""));
+        pieLists.add(new PieEntry(card, "카드내역"));     //20% - 카드(cardScore), 현금서비스(cashScore)
+        pieLists.add(new PieEntry(20-card, ""));
+        pieLists.add(new PieEntry(invest, "투자"));       //20% - 투자(investScore), 보험(insuranceScore)
+        pieLists.add(new PieEntry(20-invest, ""));
+        pieLists.add(new PieEntry(repayment, "상환률"));       //10% - 상환률(repaymentPercent)
+        pieLists.add(new PieEntry(10-repayment, ""));
         return pieLists;
     }
 
