@@ -2,24 +2,18 @@ package com.example.responsibilityhome.View;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 
 import com.example.responsibilityhome.Entity.PieEntry;
 import com.example.responsibilityhome.R;
-import com.example.responsibilityhome.ResponsibilityDetailActivity;
 
 
 import java.util.ArrayList;
 import android.view.View;
 
-import org.eazegraph.lib.charts.StackedBarChart;
-import org.eazegraph.lib.models.BarModel;
-import org.eazegraph.lib.models.StackedBarModel;
 
 
 public class CreditView extends Activity {
