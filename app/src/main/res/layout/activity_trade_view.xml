@@ -10,4 +10,22 @@
         android:text="거래명"
         android:textSize="25sp"/>
 
+    <FrameLayout
+        android:id="@+id/stacakedbarchart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <org.eazegraph.lib.charts.StackedBarChart
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/stackedbarchart"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:padding="10dp"
+            app:egFixedBarWidth="true"
+            app:egBarWidth="20dp"
+            app:egLegendHeight="40dp"/>
+
+    </FrameLayout>
+
 </LinearLayout>

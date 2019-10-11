@@ -82,30 +82,13 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/detailbutton"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:text="자세히"
-        android:textSize="10dp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/round_swquare_background_thumb" />
-    </LinearLayout>
-    <FrameLayout
-        android:id="@+id/stacakedbarchart"
+        android:id="@+id/btn_add_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linear"
-        android:layout_marginTop="40dp">
+        android:text="계좌 연동 추가"
+        android:textColor="@android:color/white"
+        android:background="@drawable/round_square_background_thumb"
+        android:layout_margin="10dp"/>
+    </LinearLayout>
 
-        <org.eazegraph.lib.charts.StackedBarChart
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/stackedbarchart"
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:padding="10dp"
-            app:egFixedBarWidth="true"
-            app:egBarWidth="20dp"
-            app:egLegendHeight="40dp"/>
-
-    </FrameLayout>
 </RelativeLayout>
