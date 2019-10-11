@@ -5,17 +5,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
+
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.responsibilityhome.ImageConverter;
 import com.example.responsibilityhome.R;
-import com.example.responsibilityhome.RealEstateItem;
 import com.example.responsibilityhome.RealEstateRecyclerAdapter;
 
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 

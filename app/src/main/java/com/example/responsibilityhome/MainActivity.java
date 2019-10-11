@@ -3,43 +3,35 @@ package com.example.responsibilityhome;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 
-import com.example.responsibilityhome.Network.NetworkTask;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.responsibilityhome.Network.NetworkTask;
+import com.example.responsibilityhome.Network.RealEstateItem;
+import com.example.responsibilityhome.View.CreditView;
+import com.example.responsibilityhome.View.MonitorView;
+import com.example.responsibilityhome.View.NoticeView;
+import com.example.responsibilityhome.View.TradeListView;
+import com.example.responsibilityhome.View.TradeView;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.view.Menu;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -54,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     String key = "ZhSKuf9bGy86oevKmjyx%2F8qSdyG73oHw1FQYmv%2BgqSc3Z1U3tdPmIyoG%2B907ISVccIAqiSr7VW0E5qXspg6xoA%3D%3D";
     String data;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,11 +73,11 @@ public class MainActivity extends AppCompatActivity
 
         /*List<RealEstateItem> items = new ArrayList<>();
         RealEstateItem[] item = new RealEstateItem[5];
-        item[0] = new RealEstateItem(null, "유진","유진 유진");
-        item[1] = new RealEstateItem(null,"유진", "유진 유진");
-        item[2] = new RealEstateItem(null, "유진","유진 유진");
-        item[3] = new RealEstateItem(null,"유진", "유진 유진");
-        item[4] = new RealEstateItem(null, "유진","유진");
+        item[0] = new RealEstateItem(null, "유진", "유진 유진");
+        item[1] = new RealEstateItem(null, "유진", "유진 유진");
+        item[2] = new RealEstateItem(null, "유진", "유진 유진");
+        item[3] = new RealEstateItem(null, "유진", "유진 유진");
+        item[4] = new RealEstateItem(null, "유진", "유진");
 
         for (int i = 0; i < 5; i++) {
             items.add(item[i]);
@@ -152,26 +145,34 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // 왼쪽 drawer 버튼 클릭시 행동들!
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_credit) {
-            //신용등급
-            Intent intent = new Intent(getApplicationContext(), CreditView.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_trade) {
-            //거래관리
-            Intent intent = new Intent(getApplicationContext(), TradeView.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_setting) {
-
-        } else if (id == R.id.nav_using) {
-
+        Intent intent;
+        switch(id){
+            case R.id.nav_credit:
+                intent = new Intent(getApplicationContext(), CreditView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_trade:
+                intent = new Intent(getApplicationContext(), TradeListView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_monitor:
+                intent = new Intent(getApplicationContext(), MonitorView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_notice:
+                intent = new Intent(getApplicationContext(), NoticeView.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_setting:
+                break;
+            case R.id.nav_using:
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

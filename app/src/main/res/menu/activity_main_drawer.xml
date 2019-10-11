@@ -12,6 +12,14 @@
             android:id="@+id/nav_trade"
             android:icon="@drawable/icon_property"
             android:title="@string/menu_trade" />
+        <item
+            android:id="@+id/nav_monitor"
+            android:icon="@drawable/icon_property"
+            android:title="@string/menu_monitor" />
+        <item
+            android:id="@+id/nav_notice"
+            android:icon="@drawable/icon_property"
+            android:title="@string/menu_notice" />
     </group>
 
     <item android:title="앱">

@@ -1,4 +1,4 @@
-package com.example.responsibilityhome;
+package com.example.responsibilityhome.Network;
 
 public class RealEstateItem {
     private byte[] image;

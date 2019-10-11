@@ -7,8 +7,11 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">EnDaTa!</string>
 
-    <string name="menu_credit">신용등급</string>
-    <string name="menu_trade">거래관리</string>
+    <string name="menu_credit">나의 신용</string>
+    <string name="menu_trade">거래 관리</string>
+    <string name="menu_monitor">데이터 활용 모니터링</string>
+    <string name="menu_notice">알림</string>
+
     <string name="menu_setting">설정</string>
     <string name="menu_using">이용약관</string>
 
@@ -39,4 +42,11 @@
         <item>서울특별시 영등포구</item>
         <item>서울특별시 금천구</item>
     </string-array>
+
+
+    <string name="tab_text_1">상환이력</string>
+    <string name="tab_text_2">재정수준</string>
+    <string name="tab_text_3">거래기간</string>
+    <string name="tab_text_4">대출</string>
+    <string name="tab_text_5">임의</string>
 </resources>
