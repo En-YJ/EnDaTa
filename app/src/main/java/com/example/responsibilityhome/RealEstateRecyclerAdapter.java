@@ -1,25 +1,22 @@
 package com.example.responsibilityhome;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.responsibilityhome.Network.RealEstateItem;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRecyclerAdapter.ViewHolder> {
     Context context;
