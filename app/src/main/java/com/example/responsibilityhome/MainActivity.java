@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import com.example.responsibilityhome.Network.NetworkTask;
 import com.example.responsibilityhome.Network.RealEstateItem;
 import com.example.responsibilityhome.View.CreditView;
+import com.example.responsibilityhome.View.MonitorView;
+import com.example.responsibilityhome.View.NoticeView;
+import com.example.responsibilityhome.View.TradeListView;
 import com.example.responsibilityhome.View.TradeView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -142,7 +145,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // 왼쪽 drawer 버튼 클릭시 행동들!
@@ -156,12 +158,16 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.nav_trade:
-                intent = new Intent(getApplicationContext(), TradeView.class);
+                intent = new Intent(getApplicationContext(), TradeListView.class);
                 startActivity(intent);
                 break;
             case R.id.nav_monitor:
+                intent = new Intent(getApplicationContext(), MonitorView.class);
+                startActivity(intent);
                 break;
             case R.id.nav_notice:
+                intent = new Intent(getApplicationContext(), NoticeView.class);
+                startActivity(intent);
                 break;
             case R.id.nav_setting:
                 break;
