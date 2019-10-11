@@ -50,9 +50,9 @@ public class ImageConverter {
     public static Bitmap resize(Bitmap bitmap){
         Bitmap dstBitmap;
         if(bitmap.getWidth() > bitmap.getHeight())
-            dstBitmap = Bitmap.createScaledBitmap(bitmap, 300, (bitmap.getHeight()*300)/bitmap.getWidth(), true);
+            dstBitmap = Bitmap.createScaledBitmap(bitmap, 700, (bitmap.getHeight()*700)/bitmap.getWidth(), true);
         else
-            dstBitmap = Bitmap.createScaledBitmap(bitmap, (300*bitmap.getWidth())/bitmap.getHeight(), 300, true);
+            dstBitmap = Bitmap.createScaledBitmap(bitmap, (700*bitmap.getWidth())/bitmap.getHeight(), 700, true);
         return dstBitmap;
     }
 }

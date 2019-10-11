@@ -1,19 +1,12 @@
 package com.example.responsibilityhome;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 public class LoginActivity extends Activity {
     String email;
@@ -43,11 +36,6 @@ public class LoginActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        //drawer 열려 있을 경우 닫기
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
             // AlertDialog 빌더를 이용해 종료시 발생시킬 창을 띄운다
             AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
             alBuilder.setMessage("종료하시겠습니까?");
@@ -71,7 +59,6 @@ public class LoginActivity extends Activity {
             alBuilder.setIcon(R.drawable.th_icon); //아이콘 설정
             alBuilder.show(); // AlertDialog.Bulider로 만든 AlertDialog를 보여준다.
         }
-    }
 
 
 }
