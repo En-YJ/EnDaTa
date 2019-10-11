@@ -45,15 +45,22 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
                 .into(holder.image);
 
         if(item.getMonthly().equals("0")) {
-            holder.event.setText(" 전세 ");
-            holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));
+            holder.title.setText("전세 "+item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
         }
         else{
-            holder.event.setText(" 월세 ");
+            holder.title.setText("월세 "+item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
+        }
+
+        //신용공개여부
+        if(true){
+            holder.event.setText(" 신용공개 임대인 ");
+            holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));
+        }
+        else {
+            holder.event.setText(" 신용비공개 임대인 ");
             holder.event.setBackgroundColor(Color.parseColor("#804FB7F8"));
         }
 
-        holder.title.setText(item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
         holder.charter.setText("구로구 "+item.getDong());
 
         holder.cardview.setOnClickListener(new View.OnClickListener() {

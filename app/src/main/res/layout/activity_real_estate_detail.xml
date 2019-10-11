@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="6"
+        android:layout_weight="7"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -182,6 +182,37 @@
 
 
 
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp"
+            android:background="@drawable/yeop_button_style">
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_weight="0"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/user" />
+
+        <Button
+            android:onClick="LandlordCreditViewApplyButton"
+            android:layout_weight="0"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/btn_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_square_background_thumb"
+            android:textColor="@color/white"
+            android:text=" 임대인 신용 열람 신청 "/>
+
+    </LinearLayout>
+
+
+
     </LinearLayout>
 
     <!--<LinearLayout
@@ -288,16 +319,6 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
     </LinearLayout>-->
-    <Button
-        android:onClick="LandlordCreditButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
 
-        android:background="@drawable/yeop_button_style"
-        android:text="임대인 신용 열람 신청"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="17dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"/>
 
 </LinearLayout>
