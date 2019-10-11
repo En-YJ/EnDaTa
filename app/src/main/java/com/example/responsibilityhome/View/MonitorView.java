@@ -36,12 +36,14 @@ public class MonitorView extends Activity {
         MonitorAdapter monitorAdapter = new MonitorAdapter(this, dataProvisions);
         listView.setAdapter(monitorAdapter);
 
+        /*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // 개인정보 사용내역 상세 설정
             }
         });
+        */
     }
 
     public void initializeData(){
