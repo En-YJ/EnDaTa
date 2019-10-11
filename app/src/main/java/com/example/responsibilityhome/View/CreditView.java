@@ -2,7 +2,6 @@ package com.example.responsibilityhome.View;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.responsibilityhome.Entity.PieEntry;
 import com.example.responsibilityhome.R;
-import com.example.responsibilityhome.ResponsibilityDetailActivity;
 
 
 import java.io.BufferedReader;
