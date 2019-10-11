@@ -48,6 +48,16 @@ public class CreditView extends Activity {
     String userLoanData;
     String userData;
 
+    //재정
+    String[] userAccountDataSplit;
+    int accountMoneySum=0;
+
+    //현금서비스
+    String[] userCardDataSplit;
+
+    //신용카드
+    String[] userCreditCardDataSplit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,35 +67,115 @@ public class CreditView extends Activity {
         TextView name = (TextView)findViewById(R.id.name);
         name.setText("2등급");
 
+        TextView sumScore = (TextView)findViewById(R.id.sum_score);
+
         GetAccountDataJSON g1 = new GetAccountDataJSON();
         try {
             userAccountData = g1.execute("http://49.236.135.136/holding_account_select.php").get();
             Log.d("yeop", ""+userAccountData);
+            userAccountDataSplit = userAccountData.split("/");
+
+            Integer.valueOf(userAccountDataSplit[1]);
         } catch (ExecutionException e) {
+
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        //예금/신탁
+        TextView accountScore = findViewById(R.id.account_score);
+        if(Integer.parseInt(userAccountDataSplit[1])>=50000000)
+            accountScore.setText("200");
+        else if(Integer.parseInt(userAccountDataSplit[1])>=10000000)
+            accountScore.setText("160");
+        else if(Integer.parseInt(userAccountDataSplit[1])>=5000000)
+            accountScore.setText("120");
+        else if(Integer.parseInt(userAccountDataSplit[1])>=1000000)
+            accountScore.setText("80");
+        else if(Integer.parseInt(userAccountDataSplit[1])>=100000)
+            accountScore.setText("40");
+        else
+            accountScore.setText("0");
+
+        //점수 합
+        sumScore.setText(String.valueOf(Integer.parseInt(accountScore.getText().toString())+Integer.parseInt(sumScore.getText().toString())));
+
+        //투자
+        TextView investScore = findViewById(R.id.invest_score);
+        if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=50000000)
+            investScore.setText("100");
+        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=10000000)
+            investScore.setText("80");
+        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=2000000)
+            investScore.setText("60");
+        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=1000000)
+            investScore.setText("40");
+        else if(Integer.parseInt(userAccountDataSplit[5]) + Integer.parseInt(userAccountDataSplit[13])>=500000)
+            investScore.setText("20");
+        else
+            investScore.setText("20");
+
+        sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(investScore.getText().toString())));
+
+        //대출
+        TextView loanScore = findViewById(R.id.loan_score);
+        if(Integer.parseInt(userAccountDataSplit[9])>=20000000)
+            loanScore.setText("0");
+        else if(Integer.parseInt(userAccountDataSplit[9])>=10000000)
+            loanScore.setText("20");
+        else if(Integer.parseInt(userAccountDataSplit[9])>=3000000)
+            loanScore.setText("40");
+        else if(Integer.parseInt(userAccountDataSplit[9])>=1000000)
+            loanScore.setText("60");
+        else if(Integer.parseInt(userAccountDataSplit[9])>=600000)
+            loanScore.setText("80");
+        else
+            loanScore.setText("100");
+
+        sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(loanScore.getText().toString())));
 
         GetCardDataJSON g2 = new GetCardDataJSON();
         try {
             userCardData = g2.execute("http://49.236.135.136/CardService_select.php").get();
             Log.d("yeop", ""+userCardData);
+            userCardDataSplit = userCardData.split("/");
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //대출
+        TextView cashScore = findViewById(R.id.cash_score);
+        if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>=1000000)
+            cashScore.setText("0");
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>500000)
+            cashScore.setText("20");
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>200000)
+            cashScore.setText("40");
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>100000)
+            cashScore.setText("60");
+        else if(Integer.parseInt(userCardDataSplit[0])+Integer.parseInt(userCardDataSplit[1])>50000)
+            cashScore.setText("80");
+        else
+            cashScore.setText("100");
+
+        sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt(cashScore.getText().toString())));
+
         GetCreditCardDataJSON g3 = new GetCreditCardDataJSON();
         try {
             userCreditCardData = g3.execute("http://49.236.135.136/CreditCard_select.php").get();
             Log.d("yeop", ""+userCreditCardData);
+            userCreditCardDataSplit = userCreditCardData.split("/");
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        TextView cardScore = findViewById(R.id.card_score);
+
 
         GetLoanDataJSON g4 = new GetLoanDataJSON();
         try {
@@ -173,7 +263,7 @@ public class CreditView extends Activity {
                     posts = jsonObj.getJSONArray(TAG_AMOUNT);
                     for (int i = 0; i < posts.length(); i++) {
                         JSONObject c = posts.getJSONObject(i);
-                        if (c.getString("joinKey").equals("youngjinBBam")) {
+                        if (c.getString("joinKey").equals("yujinBBam")) {
                                 userData += ""+ c.getString("data") + "/" + c.getString("resAccountBalance") + "/" + c.getString("resOverdraftAcctYN") + "/" + c.getString("resAccountNickName") + "/";
                         }
                     }
@@ -208,7 +298,7 @@ public class CreditView extends Activity {
                 posts = jsonObj.getJSONArray(TAG_AMOUNT);
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject c = posts.getJSONObject(i);
-                    if (c.getString("joinKey").equals("youngjinBBam")) {
+                    if (c.getString("joinKey").equals("yujinBBam")) {
                         userData += ""+ c.getString("resCashService") + "/" + c.getString("resCardLoan") + "/";
                     }
                 }
