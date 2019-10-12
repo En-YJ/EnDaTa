@@ -76,6 +76,7 @@ public class CreditView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credit_view);
 
+
         Button addAccountBtn = findViewById(R.id.btn_add_account);
         addAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,6 +247,7 @@ public class CreditView extends Activity {
         //연체
         loanNumber = findViewById(R.id.overdue_score);
         loanNumber.setText(userLoanDataSplit[5]);
+        Log.d("qweqweqwe","2"+userLoanDataSplit[5]);
         if(Integer.parseInt(userLoanDataSplit[5])>=10)
             sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("0")));
         else if(Integer.parseInt(userLoanDataSplit[5])>=7)
@@ -261,20 +263,25 @@ public class CreditView extends Activity {
 
         //상환률
         repaymentPercent = findViewById(R.id.repayment_score);
-        repaymentPercent.setText(String.valueOf(Integer.parseInt(userLoanDataSplit[2])*100/Integer.parseInt(userLoanDataSplit[3])));
-        if(Integer.parseInt(repaymentPercent.getText().toString())>=100)
-            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("100")));
-        else if(Integer.parseInt(repaymentPercent.getText().toString())>=80)
-            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("80")));
-        else if(Integer.parseInt(repaymentPercent.getText().toString())>=60)
-            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("60")));
-        else if(Integer.parseInt(repaymentPercent.getText().toString())>=40)
-            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("40")));
-        else if(Integer.parseInt(repaymentPercent.getText().toString())>=20)
-            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("20")));
-        else
-            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString())+Integer.parseInt("0")));
-
+        if(userLoanDataSplit[2]=="0" || userLoanDataSplit[3] == "0") {
+            repaymentPercent.setText("100");
+            sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("100")));
+        }
+        else {
+            repaymentPercent.setText(String.valueOf(Integer.parseInt(userLoanDataSplit[2]) * 100 / Integer.parseInt(userLoanDataSplit[3])));
+            if (Integer.parseInt(repaymentPercent.getText().toString()) >= 100)
+                sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("100")));
+            else if (Integer.parseInt(repaymentPercent.getText().toString()) >= 80)
+                sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("80")));
+            else if (Integer.parseInt(repaymentPercent.getText().toString()) >= 60)
+                sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("60")));
+            else if (Integer.parseInt(repaymentPercent.getText().toString()) >= 40)
+                sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("40")));
+            else if (Integer.parseInt(repaymentPercent.getText().toString()) >= 20)
+                sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("20")));
+            else
+                sumScore.setText(String.valueOf(Integer.parseInt(sumScore.getText().toString()) + Integer.parseInt("0")));
+        }
         GetUserDataJSON g5 = new GetUserDataJSON();
         try {
             userData = g5.execute("http://49.236.135.136/User_select.php").get();
@@ -331,7 +338,7 @@ public class CreditView extends Activity {
                     posts = jsonObj.getJSONArray(TAG_AMOUNT);
                     for (int i = 0; i < posts.length(); i++) {
                         JSONObject c = posts.getJSONObject(i);
-                        if (c.getString("joinKey").equals("yujinBBam")) {
+                        if (c.getString("joinKey").equals("youngjinBBam")) {
                                 userData += ""+ c.getString("data") + "/" + c.getString("resAccountBalance") + "/" + c.getString("resOverdraftAcctYN") + "/" + c.getString("resAccountNickName") + "/";
                         }
                     }
@@ -366,7 +373,7 @@ public class CreditView extends Activity {
                 posts = jsonObj.getJSONArray(TAG_AMOUNT);
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject c = posts.getJSONObject(i);
-                    if (c.getString("joinKey").equals("yujinBBam")) {
+                    if (c.getString("joinKey").equals("youngjinBBam")) {
                         userData += ""+ c.getString("resCashService") + "/" + c.getString("resCardLoan") + "/";
                     }
                 }
@@ -401,7 +408,7 @@ public class CreditView extends Activity {
                 posts = jsonObj.getJSONArray(TAG_AMOUNT);
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject c = posts.getJSONObject(i);
-                    if (c.getString("joinKey").equals("yujinBBam")) {
+                    if (c.getString("joinKey").equals("youngjinBBam")) {
                         userData += ""+ c.getString("resUsedAmount") + "/" + c.getString("resRemainLimit") + "/";
                     }
                 }
@@ -437,7 +444,7 @@ public class CreditView extends Activity {
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject c = posts.getJSONObject(i);
                     if (c.getString("joinKey").equals("youngjinBBam")) {
-                        userData += ""+ c.getString("resAccountStartDate") + "/" + c.getString("resAccountEndDate") + "/" + c.getString("resLoanBalance") + "/" + c.getString("resPrincipal") + "/" + c.getString("resRate") + "/" + c.getString("resState") + "/";
+                        userData += ""+ c.getString("resAccountStartDate") + "/" + c.getString("resAccountEndDate") + "/" + c.getString("resLoanBalance") + "/" + c.getString("resPrincipal") + "/" + c.getString("resRate") + "/" + c.getString("resState") + "/"+ c.getString("joinKey") + "/";
                     }
                 }
                 return userData;

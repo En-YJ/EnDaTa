@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.responsibilityhome.Model.Trade;
 import com.example.responsibilityhome.View.CreditView;
 
 import org.json.JSONArray;
@@ -36,6 +37,8 @@ public class LoginActivity extends Activity {
     private static final String TAG_AMOUNT = "result";
 
     JSONArray posts = null;
+
+    Trade trade;
 
     //대출내역
     String[] userDataSplit;
@@ -63,16 +66,20 @@ public class LoginActivity extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Log.d("asdasd",""+userData);
-                if(email=="" || password ==""){
+
+                if(email.equals("") || password.equals("")){
                     Toast.makeText(getApplicationContext(),"아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else if(userData=="") {
+                    Toast.makeText(getApplicationContext(),"아이디가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else if(email.equals(userDataSplit[1]) && password.equals(userDataSplit[2])) {
                     startActivity(new Intent(getApplication(), MainActivity.class));
+
                     LoginActivity.this.finish();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"아이디와 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -111,7 +118,7 @@ public class LoginActivity extends Activity {
         protected String doInBackground(String... params) {
             String uri = params[0];
             String email = params[1];
-            Log.d("asdasd",""+email);
+
             String postParameters = "email=" + email;
 
             BufferedReader bufferedReader = null;
@@ -140,7 +147,7 @@ public class LoginActivity extends Activity {
                 posts = jsonObj.getJSONArray(TAG_AMOUNT);
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject c = posts.getJSONObject(i);
-                    if (c.getString("joinKey").equals("youngjinBBam")) {
+                    if (email.equals(c.getString("id"))) {
                         userData += ""+ c.getString("name") + "/" + c.getString("id") + "/" + c.getString("password") + "/";
                     }
                 }
