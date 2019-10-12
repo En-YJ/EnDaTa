@@ -51,7 +51,8 @@ public class RealEstateRecyclerAdapter extends RecyclerView.Adapter<RealEstateRe
             holder.title.setText("월세 "+item.getCharter()+"/"+item.getMonthly()+"  "+item.getTitle());
         }
 
-        //신용공개여부
+
+        // 임대인 신용 공개여부
         if(true){
             holder.event.setText(" 신용공개 임대인 ");
             holder.event.setBackgroundColor(Color.parseColor("#8013B9A5"));

@@ -71,9 +71,4 @@ public class RealEstateDetail extends AppCompatActivity {
     }
 
 
-    /*//임대인 신용 버튼 클릭
-    public void LandlordCreditButton(View view){
-        Intent intent = new Intent(getApplicationContext(), LandlordCreditView.class);
-        startActivity(intent);
-    }*/
 }
