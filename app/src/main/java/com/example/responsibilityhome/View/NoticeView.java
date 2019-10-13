@@ -82,17 +82,21 @@ class NoticeAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = layoutInflater.inflate(R.layout.item_notice, null);
 
+
+        final String id = data.get(i);
+        TextView userId = v.findViewById(R.id.id);
+        userId.setText(id);
+
         ImageView userIcon = v.findViewById(R.id.user_icon);
         userIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 사용자 정보 화면 띄움
+                Intent intent = new Intent(context, UserCreditView.class);
+                intent.putExtra("name",id);
+                context.startActivity(intent);
             }
         });
-
-        final String id = data.get(i);
-        TextView userId = v.findViewById(R.id.id);
-        userId.setText(id);
 
         Button acceptBtn = v.findViewById(R.id.btn_accept);
         acceptBtn.setOnClickListener(new View.OnClickListener() {

@@ -1,66 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
-    <!-- 상단 타이틀바 -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/colorPrimary">
-        <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="100dp" />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:onClick="LandlordCreditViewXClicked"
-            android:src="@drawable/ic_close_24dp"/>
-        <TextView
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:maxLength="15"
-            android:id="@+id/res_class_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="임대인 신용"
-            android:textStyle="bold"
-            android:textSize="21dp"
-            android:textColor="#FFFFFF"/>
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title">
-
-        <com.example.responsibilityhome.View.PieView
-            android:id="@+id/pieView"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@android:color/white" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="center"
-            android:text="1등급"
-            android:textSize="40sp"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:text="신용 정보"
+            android:textColor="@color/black"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginVertical="10dp"
+            android:background="@android:color/darker_gray" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="' ann0905 ' 님의 신용 정보" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.responsibilityhome.View.PieView
+                android:id="@+id/pieView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@android:color/white" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:gravity="center"
+                android:text="1등급"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <!-- 미승인시 메시지 -->
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="상세 정보는 사용자 승인 후\n열람이 가능합니다."
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <!-- 승인시 메시지 -->
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
@@ -447,20 +457,8 @@
                 android:text=" %"
                 android:textSize="20sp"/>
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray" />
-
-        <Button
-            android:id="@+id/btn_add_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/round_square_background_thumb"
-            android:text="계좌 연동 추가"
-            android:textColor="@android:color/white" />
     </LinearLayout>
 
+
+    </LinearLayout>
 </ScrollView>

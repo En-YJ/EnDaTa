@@ -14,11 +14,11 @@
             android:title="@string/menu_trade" />
         <item
             android:id="@+id/nav_monitor"
-            android:icon="@drawable/icon_property"
+            android:icon="@drawable/ic_monitor"
             android:title="@string/menu_monitor" />
         <item
             android:id="@+id/nav_notice"
-            android:icon="@drawable/icon_property"
+            android:icon="@drawable/ic_notice"
             android:title="@string/menu_notice" />
     </group>
 
